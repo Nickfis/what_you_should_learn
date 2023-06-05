@@ -1,0 +1,14 @@
+.header {
+  & ul {
+    display: flex;
+    list-style: none;
+    margin-bottom: 48px;
+    font-weight: light;
+    font-size: 1.4rem;
+
+    & li:not(:last-of-type) {
+      cursor: pointer;
+      margin-right: 38px;
+    }
+  }
+}

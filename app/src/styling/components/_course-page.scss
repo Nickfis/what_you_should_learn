@@ -1,0 +1,35 @@
+.course-page {
+  &__overview {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__info {
+    width: 60%;
+  }
+
+  &__metrics {
+    width: 30%;
+  }
+
+  &__published {
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  &__metric {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 28px;
+    border: 5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:first-of-type {
+      margin-bottom: 16px;
+    }
+  }
+}
