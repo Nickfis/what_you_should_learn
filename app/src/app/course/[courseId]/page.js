@@ -41,6 +41,25 @@ const Course = async ({ params }) => {
 
   client.release();
 
+  const expectedViews = videos.map((video) => ({
+    video_number: video.video_number,
+    views: video.expected_views,
+    title: video.title_on_youtube,
+  }));
+
+  const actualViews = videos.map((video) => ({
+    video_number: video.video_number,
+    views: video.view_count,
+    title: video.title_on_youtube,
+  }));
+
+  const dataToDisplay = videos.map((video) => ({
+    "Video Number": video.video_number,
+    "Actual Views": Math.round(video.view_count),
+    "Expected Views": Math.round(video.expected_views),
+    title: video.title_on_youtube,
+  }));
+
   //   What to display:
   // Publishing date of first video.
   // total view count across all videos
@@ -85,7 +104,11 @@ const Course = async ({ params }) => {
           </h3>
         </div>
       </section>
-      <CourseLineChart />
+      <h2 className="course-page__section-headline">Course Lecture Views</h2>
+      <div className="course-page__views-chart">
+        <CourseLineChart data={dataToDisplay} />
+      </div>
+      <h2 className="course-page__section-headline">All Course Lectures</h2>
     </div>
   );
 };

@@ -2,27 +2,93 @@
 import {
   LineChart,
   Line,
-  CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
+  ResponsiveContainer,
+  Legend,
 } from "recharts";
 
-const CourseLineChart = () => {
-  const data = [{ name: "Page A", uv: 400, pv: 2400, amt: 2400 }];
+const CourseLineChart = ({ data }) => {
+  // Create a custom tooltip component
+  const CustomTooltip = ({ active, payload, label, data }) => {
+    if (active && payload && payload.length) {
+      // Find the lecture name
+      const lecture = data.find((d) => d["Video Number"] === label);
+      const lectureName = lecture ? lecture.title : "";
+
+      return (
+        <div
+          style={{
+            backgroundColor: "#3e4452",
+            border: "none",
+            borderRadius: "15px",
+            padding: "10px",
+          }}
+        >
+          <p>{lectureName}</p>
+          {payload.map((entry, index) => (
+            <p key={`item-${index}`}>{`${
+              entry.name
+            }: ${entry.value.toLocaleString()}`}</p>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  // And use the custom tooltip in the chart
+  <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+    ...
+    <Tooltip content={<CustomTooltip data={data} />} />
+    ...
+  </LineChart>;
+
   return (
-    <LineChart
-      width={600}
-      height={300}
-      data={data}
-      margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-    >
-      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-    </LineChart>
+    <ResponsiveContainer>
+      <LineChart
+        data={data}
+        margin={{ top: 5, right: 20, bottom: 30, left: 20 }}
+      >
+        <Line type="monotone" dataKey="Expected Views" stroke="#fffefe" />
+        <Line type="monotone" dataKey="Actual Views" stroke="#9dff00" />
+        {/* <CartesianGrid stroke="#ccc" strokeDasharray="5 5" /> */}
+        <XAxis
+          dataKey="Video Number"
+          tick={{ fill: "white" }}
+          label={{
+            value: "Video Lecture Number",
+            position: "insideBottom",
+            offset: -30,
+            fill: "white",
+          }}
+        />
+        <YAxis
+          tick={{ fill: "white" }}
+          tickFormatter={(tick) => tick.toLocaleString()}
+        />
+        {/* <Tooltip
+          contentStyle={{
+            backgroundColor: "#00064a",
+            border: "none",
+            borderRadius: "15px",
+          }}
+        /> */}
+        <Tooltip
+          contentStyle={{
+            backgroundColor: "#00064a",
+            border: "none",
+            borderRadius: "15px",
+          }}
+          content={<CustomTooltip data={data} />}
+          formatter={(value, name) => [value.toLocaleString(), name]}
+        />
+
+        <Legend verticalAlign="top" height={36} />
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
 
