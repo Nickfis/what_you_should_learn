@@ -1,10 +1,16 @@
 import connectToDb from "@/utils/connectToDb";
 import { formatDate } from "@/utils/dateFunctions";
-import { getMetricColor } from "@/utils/helper";
+import {
+  generatePopularityText,
+  generateStudentRetentionText,
+  getMetricColor,
+} from "@/utils/helper";
 import CourseLineChart from "@/app/components/CourseLineChart";
+import Table from "@/app/components/Table";
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
+  // return await pool.connect();
   const client = await connectToDb();
 
   try {
@@ -20,7 +26,7 @@ export async function generateStaticParams() {
   } catch (error) {
     console.error(error);
   } finally {
-    client.release();
+    client.end();
   }
 }
 
@@ -39,21 +45,10 @@ const Course = async ({ params }) => {
   const course = resCourse.rows[0];
   const videos = resVideo.rows;
 
-  client.release();
-
-  const expectedViews = videos.map((video) => ({
-    video_number: video.video_number,
-    views: video.expected_views,
-    title: video.title_on_youtube,
-  }));
-
-  const actualViews = videos.map((video) => ({
-    video_number: video.video_number,
-    views: video.view_count,
-    title: video.title_on_youtube,
-  }));
+  client.end();
 
   const dataToDisplay = videos.map((video) => ({
+    ...video,
     "Video Number": video.video_number,
     "Actual Views": Math.round(video.view_count),
     "Expected Views": Math.round(video.expected_views),
@@ -61,7 +56,6 @@ const Course = async ({ params }) => {
   }));
 
   //   What to display:
-  // Publishing date of first video.
   // total view count across all videos
   // average view acount
   // popularity score
@@ -82,35 +76,48 @@ const Course = async ({ params }) => {
           </p>
         </div>
         <div className="card course-page__metrics">
-          <h3
-            className="course-page__metric"
-            style={{
-              borderColor: getMetricColor(
-                Math.round(course.popularity_pct * 100)
-              ),
-            }}
-          >
-            {Math.round(course.popularity_pct * 100)}%
-          </h3>
-          <h3
-            className="course-page__metric"
-            style={{
-              borderColor: getMetricColor(
-                Math.round(course["stick_with_it_metric_pct"] * 100)
-              ),
-            }}
-          >
-            {Math.round(course["stick_with_it_metric_pct"] * 100)}%
-          </h3>
+          <div className="course-page__metric-box">
+            <h3
+              className="course-page__metric"
+              style={{
+                borderColor: getMetricColor(
+                  Math.round(course.popularity_pct * 100)
+                ),
+              }}
+            >
+              {Math.round(course.popularity_pct * 100)}%
+            </h3>
+            <p>{generatePopularityText(course.popularity_pct * 100)}</p>
+          </div>
+          <div className="course-page__metric-box">
+            <h3
+              className="course-page__metric"
+              style={{
+                borderColor: getMetricColor(
+                  Math.round(course["stick_with_it_metric_pct"] * 100)
+                ),
+              }}
+            >
+              {Math.round(course["stick_with_it_metric_pct"] * 100)}%
+            </h3>
+            <p>
+              {generateStudentRetentionText(
+                course["stick_with_it_metric_pct"] * 100
+              )}
+            </p>
+          </div>
         </div>
       </section>
-      <h2 className="course-page__section-headline">Course Lecture Views</h2>
+      <h2 className="section-headline">Course Lecture Views</h2>
       <div className="course-page__views-chart">
         <CourseLineChart data={dataToDisplay} />
       </div>
-      <h2 className="course-page__section-headline">All Course Lectures</h2>
+      <h2 className="section-headline">All Course Lectures</h2>
+      <Table data={dataToDisplay} />
     </div>
   );
 };
 
 export default Course;
+
+export const revalidate = 600; // revalidate this page every 10 minutes

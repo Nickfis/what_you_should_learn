@@ -1,0 +1,56 @@
+.table {
+  width: 100%;
+  list-style: none;
+
+  & li:not(:first-of-type) {
+    border-top: none;
+    margin-top: 3px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #414c52;
+    padding: 0 16px;
+    // border: 1px solid white;
+
+    &:not(:first-of-type) {
+      border-top: none;
+      margin-top: 3px;
+    }
+
+    &--course {
+      & .course-page__metric {
+        height: 80px;
+        min-height: 80px;
+        width: 80px;
+        min-width: 80px;
+      }
+    }
+  }
+  &__video-content {
+    width: 50%;
+    margin: 0 24px;
+    padding: 12px 0;
+
+    & p {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+
+  &__row-views {
+    width: 15%;
+    padding: 12px 0;
+    &--green {
+      color: rgb(146, 191, 146);
+    }
+
+    & p:last-of-type {
+      margin-top: 8px;
+      font-weight: 600;
+    }
+  }
+}

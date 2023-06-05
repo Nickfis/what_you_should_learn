@@ -4,7 +4,7 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -55,5 +55,10 @@ button {
 }
 
 .mb-xl {
+  margin-bottom: 32px;
+}
+
+.section-headline {
+  margin-top: 32px;
   margin-bottom: 32px;
 }

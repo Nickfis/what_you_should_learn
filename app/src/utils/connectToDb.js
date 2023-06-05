@@ -1,8 +1,8 @@
-import { Pool } from "pg";
+import { Client } from "pg";
 
 export default async function connectToDb() {
   "use server";
-  const pool = new Pool({
+  const client = new Client({
     user: process.env.PG_USER,
     host: process.env.PG_HOST,
     database: process.env.PG_DATABASE,
@@ -10,5 +10,7 @@ export default async function connectToDb() {
     port: process.env.PG_PORT,
   });
 
-  return await pool.connect();
+  await client.connect();
+
+  return client;
 }

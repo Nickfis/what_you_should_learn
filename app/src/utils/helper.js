@@ -21,3 +21,28 @@ export function getMetricColor(metric) {
 
   return color;
 }
+
+export function generateStudentRetentionText(metric) {
+  if (metric > 50) {
+    return `Ranks in the top ${Math.round(
+      100 - metric
+    )}% for student retention across all courses`;
+  } else {
+    return `Ranks in the bottom ${Math.round(
+      metric * 100
+    )}% for student retention across all courses`;
+  }
+}
+
+export function generatePopularityText(metric) {
+  // More popular than 8% of courses that we have data for
+  if (metric > 50) {
+    return `Ranks in the top ${Math.round(
+      100 - metric
+    )}% in popularity across all courses`;
+  } else {
+    return `Ranks in the bottom ${Math.round(
+      metric * 100
+    )}% in popularity across all courses`;
+  }
+}

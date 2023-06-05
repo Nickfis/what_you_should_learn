@@ -1,0 +1,24 @@
+.ranking {
+  &__title {
+    font-weight: 300;
+    margin-top: 8px;
+    margin-bottom: 40px;
+  }
+  &__option {
+    font-weight: 400;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 40px;
+
+    &:first-of-type {
+      margin-left: 8px;
+      margin-right: 4px;
+    }
+    &:last-of-type {
+      margin-left: 4px;
+    }
+    &--active {
+      text-decoration: underline;
+    }
+  }
+}

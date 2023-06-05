@@ -6,11 +6,27 @@
   }
 
   &__info {
-    width: 60%;
+    width: 65%;
   }
 
   &__metrics {
-    width: 25%;
+    width: 30%;
+  }
+
+  &__metric-box {
+    height: 110px;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+
+    &:first-of-type {
+      margin-bottom: 16px;
+    }
+
+    & p {
+      font-size: 15px;
+      margin-left: 8px;
+    }
   }
 
   &__published {
@@ -20,6 +36,8 @@
 
   &__metric {
     width: 100px;
+    min-width: 100px;
+    min-height: 100px;
     height: 100px;
     border-radius: 50%;
     font-size: 28px;
@@ -27,19 +45,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &:first-of-type {
-      margin-bottom: 16px;
-    }
   }
 
   &__views-chart {
     width: 100%;
     height: 30vh;
-  }
-
-  &__section-headline {
-    margin-top: 32px;
-    margin-bottom: 32px;
   }
 }
