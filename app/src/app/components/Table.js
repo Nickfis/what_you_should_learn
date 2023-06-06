@@ -15,6 +15,15 @@ const Table = ({ data, type = "videoLecture" }) => {
             course={{ ...course, ranking: idx + 1 }}
           />
         ));
+      case "outstandingLectures":
+        return data.map((element) => (
+          <Lecture key={element.video_id} video={element} withFactor={true} />
+        ));
+
+      case "courseWithThumbnail":
+        return data.map((course, idx) => (
+          <Course key={course.course_id} course={course} ranking={false} />
+        ));
       default:
         break;
     }

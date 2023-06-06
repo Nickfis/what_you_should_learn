@@ -1,6 +1,9 @@
+import { useWindowSize } from "@/utils/windowSize";
 import Link from "next/link";
 
-const Course = ({ course }) => {
+const Course = ({ course, ranking = true }) => {
+  const { width } = useWindowSize();
+
   return (
     <li>
       <Link
@@ -8,18 +11,24 @@ const Course = ({ course }) => {
         passHref
         href={`/course/${course.course_id}`}
       >
-        <h3
-          className="course-page__metric"
-          style={{
-            borderColor: "green",
-          }}
-        >
-          {course.ranking}
-        </h3>
+        {ranking && (
+          <h3
+            className="course-page__metric"
+            style={{
+              borderColor: "green",
+            }}
+          >
+            {course.ranking}
+          </h3>
+        )}
         <div className="table__video-content">
           <h4 className="table__row-headline">{course.title}</h4>
           <p className="table__row-date">
-            {course.description.slice(0, 150).split(" ").slice(0, -1).join(" ")}
+            {course.description
+              .slice(0, width > 599 ? 150 : 75)
+              .split(" ")
+              .slice(0, -1)
+              .join(" ")}
             ...
           </p>
         </div>

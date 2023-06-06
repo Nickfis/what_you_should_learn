@@ -54,3 +54,24 @@
     }
   }
 }
+
+@include respond(phone) {
+  .table {
+    &__row {
+      padding: 0 8px;
+    }
+
+    &__row-headline {
+      font-size: 15px;
+    }
+
+    &__video-content {
+      margin: 0 8px;
+    }
+
+    &__row-views {
+      font-size: 13px;
+      width: 20%;
+    }
+  }
+}

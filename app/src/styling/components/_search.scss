@@ -1,0 +1,51 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  position: relative;
+
+  &__found-courses {
+    position: absolute;
+    top: -40px;
+    right: 0;
+  }
+
+  & .table {
+    width: 65%;
+  }
+
+  &__filter-box {
+    width: 30%;
+  }
+}
+
+@include respond(tab-portrait) {
+  .search {
+    flex-direction: column;
+    align-items: center;
+
+    &__filter-box {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+
+    & .table {
+      width: 100%;
+    }
+  }
+}
+
+@include respond(phone) {
+  .search {
+    &__filter-box {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    &__found-courses {
+      position: absolute;
+      top: -0px;
+      right: 0;
+    }
+  }
+}

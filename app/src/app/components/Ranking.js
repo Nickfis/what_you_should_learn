@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Table from "./Table";
+import { useWindowSize } from "@/utils/windowSize";
 
 const Ranking = ({ allCourses }) => {
   const [rankBy, setRankBy] = useState("popularity");

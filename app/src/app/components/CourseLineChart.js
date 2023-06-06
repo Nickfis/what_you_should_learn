@@ -10,7 +10,6 @@ import {
 } from "recharts";
 
 const CourseLineChart = ({ data }) => {
-  // Create a custom tooltip component
   const CustomTooltip = ({ active, payload, label, data }) => {
     if (active && payload && payload.length) {
       // Find the lecture name
@@ -39,13 +38,6 @@ const CourseLineChart = ({ data }) => {
     return null;
   };
 
-  // And use the custom tooltip in the chart
-  <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-    ...
-    <Tooltip content={<CustomTooltip data={data} />} />
-    ...
-  </LineChart>;
-
   return (
     <ResponsiveContainer>
       <LineChart
@@ -69,13 +61,6 @@ const CourseLineChart = ({ data }) => {
           tick={{ fill: "white" }}
           tickFormatter={(tick) => tick.toLocaleString()}
         />
-        {/* <Tooltip
-          contentStyle={{
-            backgroundColor: "#00064a",
-            border: "none",
-            borderRadius: "15px",
-          }}
-        /> */}
         <Tooltip
           contentStyle={{
             backgroundColor: "#00064a",

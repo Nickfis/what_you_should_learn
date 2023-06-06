@@ -12,7 +12,7 @@ body {
   background: linear-gradient(to bottom, #2e3442, #20283d);
   min-height: 100vh;
   color: white;
-  padding: 3vh 14vh;
+  padding: 3vh 13.5vw;
 }
 
 html {
@@ -61,4 +61,22 @@ button {
 .section-headline {
   margin-top: 32px;
   margin-bottom: 32px;
+}
+
+@include respond(big-desktop) {
+  body {
+    padding: 3vh 24vw;
+  }
+}
+
+@include respond(tab-land) {
+  body {
+    padding: 3vh 10vw;
+  }
+}
+
+@include respond(tab-portrait) {
+  body {
+    padding: 3vh 6vw;
+  }
 }

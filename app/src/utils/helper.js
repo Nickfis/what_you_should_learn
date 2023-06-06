@@ -29,7 +29,7 @@ export function generateStudentRetentionText(metric) {
     )}% for student retention across all courses`;
   } else {
     return `Ranks in the bottom ${Math.round(
-      metric * 100
+      metric
     )}% for student retention across all courses`;
   }
 }
@@ -42,7 +42,7 @@ export function generatePopularityText(metric) {
     )}% in popularity across all courses`;
   } else {
     return `Ranks in the bottom ${Math.round(
-      metric * 100
+      metric
     )}% in popularity across all courses`;
   }
 }

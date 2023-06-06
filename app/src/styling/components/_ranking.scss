@@ -1,4 +1,5 @@
 .ranking {
+  padding-bottom: 140px;
   &__title {
     font-weight: 300;
     margin-top: 8px;
@@ -19,6 +20,21 @@
     }
     &--active {
       text-decoration: underline;
+    }
+  }
+}
+
+@include respond(phone) {
+  .ranking {
+    & .table__row-views:last-of-type {
+      display: none;
+    }
+
+    & .course-page__metric {
+      height: 60px;
+      width: 60px;
+      min-height: 60px;
+      min-width: 60px;
     }
   }
 }

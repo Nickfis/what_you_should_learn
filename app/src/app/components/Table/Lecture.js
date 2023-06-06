@@ -1,7 +1,6 @@
 import { formatDate } from "@/utils/dateFunctions";
 
-const Lecture = ({ video }) => {
-  console.log({ video });
+const Lecture = ({ video, withFactor = false }) => {
   return (
     <li className="table__row">
       <img src={`https://img.youtube.com/vi/${video.video_id}/default.jpg`} />
@@ -11,7 +10,15 @@ const Lecture = ({ video }) => {
         className="table__video-content"
       >
         <h4 className="table__row-headline">{video.title}</h4>
-        <p className="table__row-date">{formatDate(video.publishing_date)}</p>
+
+        {withFactor ? (
+          <p className="table__row-date">
+            {Math.round(video.view_count / video.expected_views) - 1}x more
+            views than expected
+          </p>
+        ) : (
+          <p className="table__row-date">{formatDate(video.publishing_date)}</p>
+        )}
       </a>
       <div className="table__row-views">
         <p>Views:</p>

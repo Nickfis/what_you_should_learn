@@ -10,16 +10,15 @@ export default async function Home() {
   JOIN (
   SELECT course_id, SUM(view_count) as overall_views FROM videos GROUP BY course_id) va
   ON va.course_id = c.course_id
-  WHERE v.video_number = 1`);
+  WHERE v.video_number = 1 AND c.available_videos > 2`);
 
   const allCourses = res.rows;
   client.end();
-  console.log(allCourses[0]);
 
   return (
     <main>
       <h2>Top 20 Courses</h2>
-      <Ranking allCourses={allCourses} type="course" />
+      <Ranking allCourses={allCourses} />
     </main>
   );
 }

@@ -3,12 +3,27 @@
     display: flex;
     list-style: none;
     margin-bottom: 48px;
-    font-weight: light;
+    font-weight: 300;
     font-size: 1.4rem;
 
     & li:not(:last-of-type) {
       cursor: pointer;
       margin-right: 38px;
+    }
+  }
+}
+
+@include respond(phone) {
+  .header {
+    & ul {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 18px;
+      & li:not(:last-of-type) {
+        cursor: pointer;
+        margin-right: 8px;
+      }
     }
   }
 }
